@@ -376,7 +376,7 @@ class _SolvedDialog extends StatelessWidget {
             _stat('Time', '${seconds ~/ 60}:${(seconds % 60).toString().padLeft(2, '0')}'),
             _stat('Score', '$score'),
           ]),
-          const SizedBox(height, 20),
+          const SizedBox(height: 20),
           SizedBox(width: double.infinity, child: ElevatedButton(
             onPressed: onNext,
             style: ElevatedButton.styleFrom(backgroundColor: AppTheme.primary, foregroundColor: Colors.white, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)), padding: const EdgeInsets.symmetric(vertical: 14)),
