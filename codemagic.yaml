@@ -22,6 +22,19 @@ workflows:
           flutter create --org com.mindpuzzles --project-name mindpuzzles freshapp
           echo "Fresh project ready"
 
+          # Fix Kotlin version in the freshly created project
+          sed -i '' 's/ext.kotlin_version = .*/ext.kotlin_version = "1.9.10"/' /tmp/freshapp/android/build.gradle 2>/dev/null || \
+          sed -i 's/ext.kotlin_version = .*/ext.kotlin_version = "1.9.10"/' /tmp/freshapp/android/build.gradle 2>/dev/null || true
+
+          # Also fix in settings.gradle if present
+          sed -i '' 's/id "org.jetbrains.kotlin.android" version .*/id "org.jetbrains.kotlin.android" version "1.9.10" apply false/' /tmp/freshapp/android/settings.gradle 2>/dev/null || \
+          sed -i 's/id "org.jetbrains.kotlin.android" version .*/id "org.jetbrains.kotlin.android" version "1.9.10" apply false/' /tmp/freshapp/android/settings.gradle 2>/dev/null || true
+
+          echo "=== build.gradle ==="
+          cat /tmp/freshapp/android/build.gradle
+          echo "=== settings.gradle ==="
+          cat /tmp/freshapp/android/settings.gradle
+
           # Copy our code
           rm -rf /tmp/freshapp/lib
           cp -r "$SRC/lib" /tmp/freshapp/lib
